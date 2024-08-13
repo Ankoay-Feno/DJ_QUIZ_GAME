@@ -1,6 +1,9 @@
 package mg.geit.DJ.quiz
 
+import android.content.Intent
 import android.os.Bundle
+import android.provider.ContactsContract
+import android.provider.Telephony.Mms.Intents
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -13,30 +16,36 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Button
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import mg.geit.DJ.quiz.ui.theme.QUIZTheme
 
-class MainActivity : ComponentActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
+class MainActivity : ComponentActivity()
+{
+    override fun onCreate(savedInstanceState: Bundle?)
+    {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
             QUIZTheme {
                 Scaffold(modifier = Modifier
-                    .fillMaxSize()) { innerPadding ->
+                    .fillMaxSize())
+                {
+                    innerPadding ->
                     FirstScreen(
+                        onclick = {val intent = Intent(this, AskingActivity::class.java)
+                            startActivity(intent)},
                         name = "Android",
                         modifier = Modifier.padding(innerPadding)
                     )
+
                 }
             }
         }
@@ -44,8 +53,12 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun FirstScreen(name: String, modifier: Modifier = Modifier) {
-        Box(modifier = Modifier.background(color = Color.White)) {
+fun FirstScreen(onclick:() -> Unit,name: String, modifier: Modifier = Modifier)
+{
+        Box(modifier = Modifier
+            .background(color = Color.White)
+            .clickable { onclick() })
+        {
             Box {
                 Column {
                     Text(
@@ -72,18 +85,12 @@ fun FirstScreen(name: String, modifier: Modifier = Modifier) {
                         modifier = Modifier
                             .fillMaxWidth()
                             .fillMaxHeight()
-                            .clickable { }
                     )
                 }
 
             }
-        }
-}
+            Button(onClick = {  }) {
 
-@Preview(showBackground = true, showSystemUi = true)
-@Composable
-fun GreetingPreview() {
-    QUIZTheme {
-        FirstScreen("Android")
-    }
+            }
+        }
 }
