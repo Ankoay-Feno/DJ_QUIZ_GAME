@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.QUIZ"
         tools:targetApi="31">
+
+        <activity android:name=".UserRegistration"/>
+        <activity android:name=".AskingActivity"/>
         <activity
             android:name=".MainActivity"
             android:exported="true"
