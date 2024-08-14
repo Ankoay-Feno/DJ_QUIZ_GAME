@@ -7,7 +7,7 @@ import java.io.InputStreamReader
 
  class JsonNedded {
     // Fonction pour lire le contenu JSON du fichier
-    private fun readJsonFromAssets(context: Context, fileName: String): String? {
+    public fun readJsonFromAssets(context: Context, fileName: String): String? {
         return try {
             val inputStream: InputStream = context.assets.open(fileName)
             val reader = BufferedReader(InputStreamReader(inputStream))
