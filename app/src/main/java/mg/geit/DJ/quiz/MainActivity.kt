@@ -2,11 +2,8 @@ package mg.geit.DJ.quiz
 
 import android.content.Intent
 import android.os.Bundle
-import android.provider.ContactsContract
-import android.provider.Telephony.Mms.Intents
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -27,25 +24,20 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import mg.geit.DJ.quiz.ui.theme.QUIZTheme
 
-class MainActivity : ComponentActivity()
-{
-    override fun onCreate(savedInstanceState: Bundle?)
-    {
+class MainActivity : ComponentActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         setContent {
             QUIZTheme {
-                Scaffold(modifier = Modifier
-                    .fillMaxSize())
-                {
-                    innerPadding ->
+                Scaffold { innerPadding ->
                     FirstScreen(
-                        onclick = {val intent = Intent(this, AskingActivity::class.java)
-                            startActivity(intent)},
+                        onclick = {
+                            val intent = Intent(this, AskingActivity::class.java)
+                            startActivity(intent)
+                        },
                         name = "Android",
                         modifier = Modifier.padding(innerPadding)
                     )
-
                 }
             }
         }
@@ -53,44 +45,39 @@ class MainActivity : ComponentActivity()
 }
 
 @Composable
-fun FirstScreen(onclick:() -> Unit,name: String, modifier: Modifier = Modifier)
-{
-        Box(modifier = Modifier
-            .background(color = Color.White)
-            .clickable { onclick() })
-        {
-            Box {
-                Column {
-                    Text(
-                        text = "QUAND PERSONNE DEMANDE TON PERSONALITE?",
-                        color = Color.Magenta,
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(top = 70.dp),
-                            textAlign = TextAlign.Center
-                    )
+fun FirstScreen(onclick: () -> Unit, name: String, modifier: Modifier = Modifier) {
+    Box(modifier = modifier
+        .background(color = Color.White)
+        .clickable { onclick() }
+    ) {
+        Box {
+            Column {
+                Text(
+                    text = "QUAND PERSONNE DEMANDE TON PERSONALITE?",
+                    color = Color.Magenta,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(top = 70.dp),
+                    textAlign = TextAlign.Center
+                )
 
+                Text(
+                    text = "CLIQUER N'INPORT OU  POUR SAVOIR".trimIndent(),
+                    color = Color.Blue,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(top = 20.dp),
+                    textAlign = TextAlign.Center
+                )
 
-                    Text(text = "CLIQUER N'INPORT OU  POUR SAVOIR".trimIndent(),
-                        color = Color.Blue,
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(top = 20.dp),
-                            textAlign = TextAlign.Center
-                    )
-
-                    Image(
-                        painter = painterResource(id = R.drawable._6_personnality_backgroud),
-                        contentDescription = "background image",
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .fillMaxHeight()
-                    )
-                }
-
-            }
-            Button(onClick = {  }) {
-
+                Image(
+                    painter = painterResource(id = R.drawable._6_personnality_backgroud),
+                    contentDescription = "background image",
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .fillMaxHeight()
+                )
             }
         }
+    }
 }
